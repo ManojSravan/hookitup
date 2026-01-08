@@ -6,7 +6,6 @@ import { ChevronDown } from "lucide-react"
 import { useState } from "react"
 import { APP_CONFIG, HOOK_CATEGORIES, NAVIGATION } from "@/lib/constants"
  
-
 export function Sidebar() {
   const pathname = usePathname()
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
@@ -21,7 +20,7 @@ export function Sidebar() {
   }
 
   return (
- <aside className="w-64 border-r border-sidebar-border bg-sidebar hidden md:flex flex-col fixed top-16 left-0 h-[calc(100vh-4rem)]">
+ <aside className="w-64 border-r border-sidebar-border bg-sidebar max-w-7xl mx-auto hidden md:flex flex-col fixed top-16   h-[calc(100vh-4rem)]">
       <div className="p-6 space-y-6 flex-1 overflow-auto">
         <div className="space-y-2">
           <h3 className="section-title text-primary">Documentation</h3>
@@ -30,7 +29,7 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`nav-link block text-primary ${pathname === item.href ? "nav-link-active" : ""}`}
+                className={`nav-link block text-primary ${pathname === item.href ? "nav-link-primary" : ""}`}
               >
                 {item.name}
               </Link>

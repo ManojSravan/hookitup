@@ -8,18 +8,20 @@ export interface HookDoc {
   longDescription: string
   code: string
   usage: string
-  params: Array<{ name: string; type: string; description: string }>
-  returns: string
+  params?: Array<{ name: string; type: string; description: string }>
+  returns?: string
 }
 
 export const hookDocs: Record<string, HookDoc> = {
+  
+  //animations
   "use-reveal": {
-    title: "useReveal",
-    category: "Animation",
-    description: "Animate any given component with satisfying reveal animations.",
-    longDescription:
-      "usePrevious is useful when you need to compare the current value with its previous state. Common use cases include detecting value changes, implementing undo/redo functionality, or tracking value transitions.",
-    code: ` 
+  title: "useReveal",
+  category: "Animation",
+  description: "Animate any given component with satisfying reveal animations.",
+  longDescription:
+    "useReveal provides smooth scroll-based animations for React components. It supports multiple animation types (slide, fade, scale, blur) with customizable directions, delays, and durations. Built with Framer Motion, it automatically triggers animations when elements enter the viewport.",
+  code: ` 
 'use client'
 
 import { ReactNode, useRef } from 'react'
@@ -108,7 +110,7 @@ const useReveal: React.FC<useRevealProps> = ({
 
 export default useReveal
 `,
-    usage: `function Example() {
+  usage: `function Example() {
   return (
     <div>
   <RevealAnimation type="slide" direction="up" delay={0.2}>
@@ -117,9 +119,88 @@ export default useReveal
     </div>
   );
 }`,
-    params: [{ name: "value", type: "T", description: "Any value to track" }],
-    returns: "T | undefined - The previous value or undefined on first render",
-  },
+},
+
+"use-slide-animations": {
+  title: "useSlideAnimations",
+  category: "Animation",
+  description: "Animate components with smooth slide and fade effects on scroll.",
+  longDescription:
+    "useSlideAnimations provides directional slide animations combined with fade effects for React components. It supports sliding from left, right, top, or bottom with customizable offsets, delays, and durations. Built with Framer Motion, it triggers animations when elements enter the viewport with GPU acceleration for optimal performance.",
+  code: ` 
+'use client'
+
+import { ReactNode, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+
+type Direction = 'left' | 'right' | 'top' | 'bottom' | 'none'
+
+interface useSlideAnimationsProps {
+  children: ReactNode
+  delay?: number
+  duration?: number
+  direction?: Direction
+  offset?: number
+}
+
+const useSlideAnimations: React.FC<useSlideAnimationsProps> = ({
+  children,
+  delay = 0,
+  duration = 0.6,
+  direction = 'none',
+  offset = 50,
+}) => {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const isInView = useInView(ref, {
+    once: true,
+    margin: '0px 0px -20% 0px',
+  })
+
+  const getInitialPosition = () => {
+    switch (direction) {
+      case 'left':
+        return { x: -offset, opacity: 0 }
+      case 'right':
+        return { x: offset, opacity: 0 }
+      case 'top':
+        return { y: -offset, opacity: 0 }
+      case 'bottom':
+        return { y: offset, opacity: 0 }
+      default:
+        return { opacity: 0 }
+    }
+  }
+
+  const animateTo = { x: 0, y: 0, opacity: 1 }
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={getInitialPosition()}
+      animate={isInView ? animateTo : getInitialPosition()}
+      transition={{ duration, delay, ease: 'easeOut' }}
+      style={{ willChange: 'transform, opacity' }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+export default useSlideAnimations
+`,
+  usage: `function Example() {
+  return (
+    <div>
+  <useSlideAnimations direction="left" delay={0.2} offset={100}>
+ <h1>Title</h1>
+ </useSlideAnimations>
+    </div>
+  );
+}`,
+},
+
+
+
   "use-debounce": {
     title: "useDebounce",
     category: "Performance",

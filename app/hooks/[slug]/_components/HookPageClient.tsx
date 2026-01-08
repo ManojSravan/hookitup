@@ -3,10 +3,9 @@
  
 import { BestPracticesList } from "@/components/sections/best-practices"
 import { CodeBlock } from "@/components/sections/code-block"
-import { Header } from "@/components/sections/header"
-import { SectionCard } from "@/components/sections/section-card"
+ import { SectionCard } from "@/components/sections/section-card"
 import { SectionHeader } from "@/components/sections/section-header"
-import { Sidebar } from "@/components/sections/sidebar"
+ 
 import { hookDocs } from "@/lib/hookdata"
 import { notFound } from "next/navigation"
 
@@ -29,9 +28,9 @@ export default function HookPageClient({ slug }: PageProps) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+ 
       <div className="flex flex-1">
-        <Sidebar />
+     
         <main className="flex-1 pl-60 overflow-auto">
           <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
             <div className="space-y-10">
@@ -53,24 +52,25 @@ export default function HookPageClient({ slug }: PageProps) {
               </div>
 
               <div className="space-y-6 pt-6 border-t border-border">
-                <SectionHeader title="API Reference" />
+                
 
                 <div className="space-y-6">
-                  <div className="space-y-3">
+                  {doc.params?<div className="space-y-3">
+                    <SectionHeader title="API Reference" />
                     <h3 className="text-lg font-semibold">Parameters</h3>
                     <div className="space-y-2">
-                      {doc.params.map((param, idx) => (
+                      {doc.params?.map((param, idx) => (
                         <SectionCard key={idx} title={param.name} type={param.type} description={param.description} />
                       ))}
                     </div>
-                  </div>
+                  </div>:<></>}
 
-                  <div className="space-y-3">
+                  {doc.returns?<div className="space-y-3">
                     <h3 className="text-lg font-semibold">Returns</h3>
                     <div className="p-4 rounded-lg bg-card border border-border">
                       <p className="text-sm text-foreground">{doc.returns}</p>
                     </div>
-                  </div>
+                  </div>:<></>}
                 </div>
               </div>
 

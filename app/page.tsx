@@ -1,16 +1,13 @@
- 
-import { Header } from "@/components/sections/header"
 import { HookCard } from "@/components/sections/hook-card"
 import { SectionHeader } from "@/components/sections/section-header"
-import { Sidebar } from "@/components/sections/sidebar"
 import { APP_CONFIG } from "@/lib/constants"
 
 const FEATURED_HOOKS = [
   {
-    name: "usePrevious",
-    description: "Track the previous value of a prop or state variable",
-    category: "State",
-    slug: "use-previous",
+    name: "useReveal",
+    description: "Animate any given component with satisfying reveal animations.",
+    category: "Animation",
+    slug: "use-reveal",
   },
   {
     name: "useDebounce",
@@ -34,16 +31,16 @@ const FEATURED_HOOKS = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <div className="flex flex-1">
-        <Sidebar />
-        <main className="flex-1 overflow-auto">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
+    <div className="flex flex-col    min-h-screen">
+     
+      <div className="flex   flex-1">
+       
+        <main className="flex-1 pl-60 overflow-auto">
+          <div className=" px-6 md:px-12 py-12">
             <div className="space-y-16">
               <div className="space-y-4 max-w-2xl">
-                <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                  {APP_CONFIG.name}
+                <h1 className="text-5xl font-bold bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                  Welcome to hookitup!
                 </h1>
                 <p className="text-lg text-foreground/70 leading-relaxed">
                   {APP_CONFIG.description} Explore custom hooks for state management, performance optimization, data
