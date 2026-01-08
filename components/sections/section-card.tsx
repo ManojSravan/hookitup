@@ -15,7 +15,7 @@ export function SectionCard({ title, type, description, className }: SectionCard
       <div className="font-mono text-sm font-semibold text-primary mb-1">
         {title}: <span className="text-foreground">{type}</span>
       </div>
-      <p className="text-sm text-foreground/70">{description}</p>
+      <p className="text-sm text-foreground">{description}</p>
     </div>
   )
 }

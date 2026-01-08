@@ -11,7 +11,7 @@ export default function GettingStarted() {
       <Header />
       <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 pl-60 overflow-auto">
           <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
             <div className="space-y-10">
               {/* Header */}

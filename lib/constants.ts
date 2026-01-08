@@ -12,6 +12,9 @@ export const HOOK_CATEGORIES = {
     { name: "useAsync", slug: "use-async" },
     { name: "useLocalStorage", slug: "use-local-storage" },
   ],
+   "Animations": [
+    { name: "useReveal", slug: "use-reveal" },
+  ],
   Performance: [
     { name: "useDebounce", slug: "use-debounce" },
     { name: "useThrottle", slug: "use-throttle" },

@@ -21,16 +21,16 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="w-64 border-r border-sidebar-border bg-sidebar hidden md:flex flex-col min-h-screen sticky top-16">
+ <aside className="w-64 border-r border-sidebar-border bg-sidebar hidden md:flex flex-col fixed top-16 left-0 h-[calc(100vh-4rem)]">
       <div className="p-6 space-y-6 flex-1 overflow-auto">
         <div className="space-y-2">
-          <h3 className="section-title">Documentation</h3>
+          <h3 className="section-title text-primary">Documentation</h3>
           <nav className="space-y-1">
             {NAVIGATION.main.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`nav-link block ${pathname === item.href ? "nav-link-active" : ""}`}
+                className={`nav-link block text-primary ${pathname === item.href ? "nav-link-active" : ""}`}
               >
                 {item.name}
               </Link>
@@ -39,7 +39,7 @@ export function Sidebar() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="section-title">Hooks</h3>
+          <h3 className="section-title ">Hooks</h3>
           <div className="space-y-2">
             {Object.entries(HOOK_CATEGORIES).map(([category, items]) => (
               <div key={category} className="space-y-1">

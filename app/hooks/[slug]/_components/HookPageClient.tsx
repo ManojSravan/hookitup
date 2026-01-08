@@ -32,7 +32,7 @@ export default function HookPageClient({ slug }: PageProps) {
       <Header />
       <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 pl-60 overflow-auto">
           <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
             <div className="space-y-10">
               <SectionHeader title={doc.title} subtitle={doc.category} description={doc.description} hasBorder={true} />
@@ -68,7 +68,7 @@ export default function HookPageClient({ slug }: PageProps) {
                   <div className="space-y-3">
                     <h3 className="text-lg font-semibold">Returns</h3>
                     <div className="p-4 rounded-lg bg-card border border-border">
-                      <p className="text-sm text-foreground/70">{doc.returns}</p>
+                      <p className="text-sm text-foreground">{doc.returns}</p>
                     </div>
                   </div>
                 </div>
