@@ -4,7 +4,7 @@ export const NAVIGATION = {
     { name: "Home", href: "/" },
     { name: "Getting Started", href: "/docs/getting-started" },
   ],
-}
+};
 
 export const HOOK_CATEGORIES = {
   "State Management": [
@@ -12,7 +12,7 @@ export const HOOK_CATEGORIES = {
     // { name: "useAsync", slug: "use-async" },
     { name: "useLocalStorage", slug: "use-local-storage" },
   ],
-   "Animations": [
+  Animations: [
     { name: "useReveal", slug: "use-reveal" },
     { name: "useSlideAnimations", slug: "use-slide-animations" },
   ],
@@ -25,19 +25,21 @@ export const HOOK_CATEGORIES = {
     { name: "useFetch", slug: "use-fetch" },
     // { name: "useQuery", slug: "use-query" },
   ],
+  "UI Behavior": [{ name: "useClickOutside", slug: "use-click-outside" }],
   // "UI & Forms": [
   //   { name: "useToggle", slug: "use-toggle" },
   //   { name: "useForm", slug: "use-form" },
   // ],
-}
+};
 
 export const APP_CONFIG = {
   name: "hookitup",
   version: "1.0.0",
-  description: "A collection of carefully crafted, production-ready React hooks",
-}
+  description:
+    "A collection of carefully crafted, production-ready React hooks",
+};
 
 export const EXTERNAL_LINKS = {
   github: "https://github.com/ManojSravan/hookitup",
   contribute: "https://github.com/ManojSravan/hookitup",
-}
+};
