@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
 // Centralized hook documentation data
 export interface HookDoc {
-  title: string
-  category: string
-  description: string
-  longDescription: string
-  code: string
-  usage: string
-  params?: Array<{ name: string; type: string; description: string }>
-  returns?: string
+  title: string;
+  category: string;
+  description: string;
+  longDescription: string;
+  code: string;
+  usage: string;
+  params?: Array<{ name: string; type: string; description: string }>;
+  returns?: string;
 }
 
 export const hookDocs: Record<string, HookDoc> = {
-  
   //animations
   "use-reveal": {
-  title: "useReveal",
-  category: "Animation",
-  description: "Animate any given component with satisfying reveal animations.",
-  longDescription:
-    "useReveal provides smooth scroll-based animations for React components. It supports multiple animation types (slide, fade, scale, blur) with customizable directions, delays, and durations. Built with Framer Motion, it automatically triggers animations when elements enter the viewport.",
-  code: ` 
+    title: "useReveal",
+    category: "Animation",
+    description:
+      "Animate any given component with satisfying reveal animations.",
+    longDescription:
+      "useReveal provides smooth scroll-based animations for React components. It supports multiple animation types (slide, fade, scale, blur) with customizable directions, delays, and durations. Built with Framer Motion, it automatically triggers animations when elements enter the viewport.",
+    code: ` 
 'use client'
 
 import { ReactNode, useRef } from 'react'
@@ -110,7 +110,7 @@ const useReveal: React.FC<useRevealProps> = ({
 
 export default useReveal
 `,
-  usage: `function Example() {
+    usage: `function Example() {
   return (
     <div>
   <RevealAnimation type="slide" direction="up" delay={0.2}>
@@ -119,15 +119,16 @@ export default useReveal
     </div>
   );
 }`,
-},
+  },
 
-"use-slide-animations": {
-  title: "useSlideAnimations",
-  category: "Animation",
-  description: "Animate components with smooth slide and fade effects on scroll.",
-  longDescription:
-    "useSlideAnimations provides directional slide animations combined with fade effects for React components. It supports sliding from left, right, top, or bottom with customizable offsets, delays, and durations. Built with Framer Motion, it triggers animations when elements enter the viewport with GPU acceleration for optimal performance.",
-  code: ` 
+  "use-slide-animations": {
+    title: "useSlideAnimations",
+    category: "Animation",
+    description:
+      "Animate components with smooth slide and fade effects on scroll.",
+    longDescription:
+      "useSlideAnimations provides directional slide animations combined with fade effects for React components. It supports sliding from left, right, top, or bottom with customizable offsets, delays, and durations. Built with Framer Motion, it triggers animations when elements enter the viewport with GPU acceleration for optimal performance.",
+    code: ` 
 'use client'
 
 import { ReactNode, useRef } from 'react'
@@ -188,7 +189,7 @@ const useSlideAnimations: React.FC<useSlideAnimationsProps> = ({
 
 export default useSlideAnimations
 `,
-  usage: `function Example() {
+    usage: `function Example() {
   return (
     <div>
   <useSlideAnimations direction="left" delay={0.2} offset={100}>
@@ -197,14 +198,13 @@ export default useSlideAnimations
     </div>
   );
 }`,
-},
-
-
+  },
 
   "use-debounce": {
     title: "useDebounce",
     category: "Performance",
-    description: "Debounce a value to optimize frequent updates and function calls.",
+    description:
+      "Debounce a value to optimize frequent updates and function calls.",
     longDescription:
       "useDebounce delays the execution of a function or value update until after the user has stopped triggering changes for a specified duration. Perfect for search inputs, API calls, and heavy computations.",
     code: `import { useState, useEffect } from 'react';
@@ -243,14 +243,19 @@ export function useDebounce<T>(value: T, delay: number = 500): T {
 }`,
     params: [
       { name: "value", type: "T", description: "The value to debounce" },
-      { name: "delay", type: "number", description: "Delay in milliseconds (default: 500)" },
+      {
+        name: "delay",
+        type: "number",
+        description: "Delay in milliseconds (default: 500)",
+      },
     ],
     returns: "T - The debounced value",
   },
   "use-local-storage": {
     title: "useLocalStorage",
     category: "State Management",
-    description: "Sync component state with browser localStorage automatically.",
+    description:
+      "Sync component state with browser localStorage automatically.",
     longDescription:
       "useLocalStorage combines React state with localStorage to persist data across browser sessions. It handles serialization, type safety, and provides easy state management with automatic persistence.",
     code: `import { useState, useEffect } from 'react';
@@ -295,14 +300,19 @@ export function useLocalStorage<T>(
 }`,
     params: [
       { name: "key", type: "string", description: "localStorage key" },
-      { name: "initialValue", type: "T", description: "Initial value if key doesn't exist" },
+      {
+        name: "initialValue",
+        type: "T",
+        description: "Initial value if key doesn't exist",
+      },
     ],
     returns: "[T, (value: T) => void] - Current value and setter function",
   },
   "use-fetch": {
     title: "useFetch",
     category: "Data Fetching",
-    description: "Simplified API data fetching with built-in loading and error states.",
+    description:
+      "Simplified API data fetching with built-in loading and error states.",
     longDescription:
       "useFetch handles the complexity of data fetching, loading states, error handling, and caching. It's a lightweight alternative to larger data fetching libraries.",
     code: `import { useState, useEffect } from 'react';
@@ -363,6 +373,70 @@ export function useFetch<T>(url: string): UseFetchState<T> {
   );
 }`,
     params: [{ name: "url", type: "string", description: "API endpoint URL" }],
-    returns: "UseFetchState<T> - Object with data, loading, and error properties",
+    returns:
+      "UseFetchState<T> - Object with data, loading, and error properties",
   },
-}
+  "use-click-outside": {
+    title: "useClickOutside",
+    category: "UI Behavior",
+    description: "Detect clicks outside a specified element.",
+    longDescription:
+      "useClickOutside provides a simple way to detect when a user clicks outside a specific element. Perfect for closing modals, dropdowns, popovers, and other UI components when the user interacts outside of them.",
+    code: `import { useEffect, RefObject } from 'react';
+
+export function useClickOutside<T extends HTMLElement = HTMLElement>(
+  ref: RefObject<T>,
+  handler: (event: MouseEvent | TouchEvent) => void
+): void {
+  useEffect(() => {
+    const listener = (event: MouseEvent | TouchEvent) => {
+      const el = ref?.current;
+      if (!el || el.contains(event.target as Node)) {
+        return;
+      }
+      handler(event);
+    };
+
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
+
+    return () => {
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
+    };
+  }, [ref, handler]);
+}`,
+    usage: `function Dropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(dropdownRef, () => setIsOpen(false));
+
+  return (
+    <div ref={dropdownRef}>
+      <button onClick={() => setIsOpen(!isOpen)}>Toggle</button>
+      {isOpen && (
+        <div>
+          <p>Dropdown content</p>
+        </div>
+      )}
+    </div>
+  );
+}`,
+    params: [
+      {
+        name: "ref",
+        type: "RefObject<T>",
+        description:
+          "React ref object pointing to the element to detect outside clicks for",
+      },
+      {
+        name: "handler",
+        type: "(event: MouseEvent | TouchEvent) => void",
+        description:
+          "Callback function to execute when a click outside is detected",
+      },
+    ],
+    returns: "void",
+  },
+};
