@@ -8,6 +8,7 @@ import { APP_CONFIG, NAVIGATION, EXTERNAL_LINKS, HOOK_CATEGORIES } from "@/lib/c
 import { ThemeToggle } from "./theme-toggle"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
+import { DialogTitle } from "@radix-ui/react-dialog"
 
 export function Header() {
   const pathname = usePathname()
@@ -87,6 +88,7 @@ export function Header() {
                     </Button>
                   </SheetTrigger>
                   <SheetContent side="left" className="w-64 p-6">
+                    <DialogTitle className="sr-only">Mobile Navigation</DialogTitle>
                     <div className="space-y-6">
                       <h3 className="section-title text-primary">Documentation</h3>
                       <nav className="space-y-1">
@@ -123,6 +125,27 @@ export function Header() {
                           </div>
                         ))}
                       </div>
+                    </div>
+                    <div className="pt-6 border-t border-sidebar-border space-y-4">
+                      <Link
+                        href={EXTERNAL_LINKS.contribute}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full px-4 py-2 text-sm bg-primary text-background font-medium rounded-lg text-center transition-colors"
+                        onClick={() => setOpen(false)}
+                      >
+                        Be a Contributor
+                      </Link>
+                      <a
+                        href={EXTERNAL_LINKS.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full px-4 py-2 text-sm font-medium rounded-lg border border-input hover:bg-muted text-center transition-colors"
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className="pr-2"><Github className="w-5 h-5 inline" /></span>
+                        View Source
+                      </a>
                     </div>
                   </SheetContent>
                 </Sheet>
