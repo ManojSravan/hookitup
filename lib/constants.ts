@@ -11,6 +11,7 @@ export const HOOK_CATEGORIES = {
     // { name: "usePrevious", slug: "use-previous" },
     // { name: "useAsync", slug: "use-async" },
     { name: "useLocalStorage", slug: "use-local-storage" },
+    { name: "useOptimistic", slug: "use-optimistic" },
   ],
   Animations: [
     { name: "useReveal", slug: "use-reveal" },
@@ -20,6 +21,8 @@ export const HOOK_CATEGORIES = {
     { name: "useDebounce", slug: "use-debounce" },
     // { name: "useThrottle", slug: "use-throttle" },
     // { name: "useMemo", slug: "use-memo-guide" },
+    { name: "useTransition", slug: "use-transition" },
+    { name: "useDeferredValue", slug: "use-deferred-value" },
   ],
   "Data Fetching": [
     { name: "useFetch", slug: "use-fetch" },
