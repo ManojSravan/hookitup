@@ -36,7 +36,7 @@ export default function Home() {
      
       <div className="flex   flex-1">
        
-        <main className="flex-1 pl-60 overflow-auto">
+        <main className="flex-1 md:pl-60 overflow-auto">
           <div className=" px-6 md:px-12 py-12">
             <div className="space-y-16">
                <div className="space-y-4 max-w-2xl">
