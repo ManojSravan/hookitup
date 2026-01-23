@@ -1,7 +1,7 @@
 import { HookCard } from "@/components/sections/hook-card"
 import { SectionHeader } from "@/components/sections/section-header"
 import { APP_CONFIG } from "@/lib/constants"
-import { CopyMarkdownButton } from "@/components/ui/copy-markdown-button"
+import { CopyMarkdownButton, DownloadMarkdownButton } from "@/components/ui/copy-markdown-button"
 
 const FEATURED_HOOKS = [
   {
@@ -47,7 +47,10 @@ export default function Home() {
                    {APP_CONFIG.description} Explore custom hooks for state management, performance optimization, data
                    fetching, and more.
                  </p>
-                 <CopyMarkdownButton />
+                 <div className="flex gap-2">
+                   <CopyMarkdownButton />
+                   <DownloadMarkdownButton />
+                 </div>
                </div>
 
               <div className="space-y-8">

@@ -20,13 +20,13 @@ export function generateHooksMarkdown(): string {
       `## Usage`,
       ``,
       `\`\`\`tsx`,
-      hook.usage,
+      hook.usage.trim(),
       `\`\`\``,
       ``,
       `## Code`,
       ``,
       `\`\`\`tsx`,
-      hook.code,
+      hook.code.trim(),
       `\`\`\``,
     ]
 
