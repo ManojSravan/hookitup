@@ -437,6 +437,151 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
           "Callback function to execute when a click outside is detected",
       },
     ],
-    returns: "void",
-  },
-};
+     returns: "void",
+   },
+   "use-optimistic": {
+     title: "useOptimistic",
+     category: "State Management",
+     description:
+       "Provides optimistic updates for immediate UI feedback during async operations.",
+     longDescription:
+       "useOptimistic allows you to show immediate UI updates while async operations are pending, then reconcile with the actual result. Perfect for forms, likes, and other interactive elements where instant feedback improves UX.",
+     code: `import { useOptimistic, useState } from 'react';
+
+export function useOptimisticLike(initialLikes: number, userId: string) {
+  const [likes, setLikes] = useState(initialLikes);
+  const [optimisticLikes, setOptimisticLikes] = useOptimistic(likes);
+
+  const toggleLike = async () => {
+    const newLikes = optimisticLikes + (likes === optimisticLikes ? 1 : -1);
+    setOptimisticLikes(newLikes);
+
+    try {
+      // Simulate API call
+      await fetch('/api/like', {
+        method: 'POST',
+        body: JSON.stringify({ userId }),
+      });
+      setLikes(newLikes);
+    } catch (error) {
+      // Revert on error
+      setOptimisticLikes(likes);
+    }
+  };
+
+  return [optimisticLikes, toggleLike];
+}`,
+     usage: `function LikeButton({ initialLikes, userId }: { initialLikes: number; userId: string }) {
+  const [likes, toggleLike] = useOptimisticLike(initialLikes, userId);
+
+  return (
+    <button onClick={toggleLike}>
+      ❤️ {likes} likes
+    </button>
+  );
+}`,
+     params: [
+       { name: "initialValue", type: "T", description: "Initial value for the state" },
+     ],
+     returns: "[T, (updater: T | ((prev: T) => T)) => void] - Optimistic value and update function",
+   },
+   "use-transition": {
+     title: "useTransition",
+     category: "Performance",
+     description:
+       "Manages non-blocking UI transitions and loading states.",
+     longDescription:
+       "useTransition enables smooth UI updates by marking some updates as non-urgent transitions. It provides a way to keep the UI responsive during heavy computations or data fetches.",
+     code: `import { useTransition, useState } from 'react';
+
+export function useTransitionSearch<T>(data: T[], searchFn: (item: T, query: string) => boolean) {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<T[]>(data);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSearch = (newQuery: string) => {
+    setQuery(newQuery);
+    startTransition(() => {
+      const filtered = data.filter(item => searchFn(item, newQuery));
+      setResults(filtered);
+    });
+  };
+
+  return { query, results, isPending, handleSearch };
+}`,
+     usage: `function SearchComponent({ items }: { items: Array<{ id: number; name: string }> }) {
+  const { query, results, isPending, handleSearch } = useTransitionSearch(
+    items,
+    (item, q) => item.name.toLowerCase().includes(q.toLowerCase())
+  );
+
+  return (
+    <div>
+      <input
+        value={query}
+        onChange={(e) => handleSearch(e.target.value)}
+        placeholder="Search..."
+      />
+      {isPending && <div>Loading...</div>}
+      <ul>
+        {results.map(item => <li key={item.id}>{item.name}</li>)}
+      </ul>
+    </div>
+  );
+}`,
+     params: [
+       { name: "data", type: "T[]", description: "Array of data to search through" },
+       { name: "searchFn", type: "(item: T, query: string) => boolean", description: "Function to filter items" },
+     ],
+     returns: "Object with query, results, isPending, and handleSearch",
+   },
+   "use-deferred-value": {
+     title: "useDeferredValue",
+     category: "Performance",
+     description:
+       "Defers expensive computations to prevent blocking the UI.",
+     longDescription:
+       "useDeferredValue allows React to defer re-rendering of expensive components until after more urgent updates. It's useful for search inputs, large lists, and other computationally intensive UI elements.",
+     code: `import { useDeferredValue, useMemo } from 'react';
+
+export function useDeferredSearch<T>(data: T[], query: string, filterFn: (item: T, query: string) => boolean) {
+  const deferredQuery = useDeferredValue(query);
+
+  const filteredData = useMemo(() => {
+    return data.filter(item => filterFn(item, deferredQuery));
+  }, [data, deferredQuery, filterFn]);
+
+  const isStale = query !== deferredQuery;
+
+  return { filteredData, isStale };
+}`,
+     usage: `function DeferredSearchList({ items }: { items: Array<{ id: number; title: string }> }) {
+  const [query, setQuery] = useState('');
+  const { filteredData, isStale } = useDeferredSearch(
+    items,
+    query,
+    (item, q) => item.title.toLowerCase().includes(q.toLowerCase())
+  );
+
+  return (
+    <div>
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search titles..."
+      />
+      {isStale && <div>Updating...</div>}
+      <ul>
+        {filteredData.map(item => <li key={item.id}>{item.title}</li>)}
+      </ul>
+    </div>
+  );
+}`,
+     params: [
+       { name: "data", type: "T[]", description: "Data array to filter" },
+       { name: "query", type: "string", description: "Search query string" },
+       { name: "filterFn", type: "(item: T, query: string) => boolean", description: "Filtering function" },
+     ],
+     returns: "Object with filteredData and isStale flag",
+   },
+ };

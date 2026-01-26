@@ -1,6 +1,7 @@
 import { HookCard } from "@/components/sections/hook-card"
 import { SectionHeader } from "@/components/sections/section-header"
 import { APP_CONFIG } from "@/lib/constants"
+import { CopyMarkdownButton, DownloadMarkdownButton } from "@/components/ui/copy-markdown-button"
 
 const FEATURED_HOOKS = [
   {
@@ -38,15 +39,19 @@ export default function Home() {
         <main className="flex-1 md:pl-60 overflow-auto">
           <div className=" px-6 md:px-12 py-12">
             <div className="space-y-16">
-              <div className="space-y-4 max-w-2xl">
-                <h1 className="text-5xl font-bold bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                  Welcome to hookitup!
-                </h1>
-                <p className="text-lg text-foreground/70 leading-relaxed">
-                  {APP_CONFIG.description} Explore custom hooks for state management, performance optimization, data
-                  fetching, and more.
-                </p>
-              </div>
+               <div className="space-y-4 max-w-2xl">
+                 <h1 className="text-5xl font-bold bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                   Welcome to hookitup!
+                 </h1>
+                 <p className="text-lg text-foreground/70 leading-relaxed">
+                   {APP_CONFIG.description} Explore custom hooks for state management, performance optimization, data
+                   fetching, and more.
+                 </p>
+                 <div className="flex gap-2">
+                   <CopyMarkdownButton />
+                   <DownloadMarkdownButton />
+                 </div>
+               </div>
 
               <div className="space-y-8">
                 <SectionHeader title="Featured Hooks" description="Get started with our most popular utilities" />
