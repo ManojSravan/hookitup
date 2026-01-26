@@ -31,7 +31,7 @@ export default function HookPageClient({ slug }: PageProps) {
  
       <div className="flex flex-1">
      
-        <main className="flex-1 pl-60 overflow-auto">
+        <main className="flex-1 md:pl-60 overflow-auto">
           <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
             <div className="space-y-10">
               <SectionHeader title={doc.title} subtitle={doc.category} description={doc.description} hasBorder={true} />
